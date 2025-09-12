@@ -2,36 +2,32 @@
 using namespace std;
 
 string longestPalindrome(string s) {
-    int len = s.length();
-    if (len == 1) return s;
-    int middle = len / 2;
-    string subStr = string(1, s[middle]);
-    if (len % 2 == 0) {
-        int leftMiddle = middle - 1;
-        if (s[leftMiddle] == s[middle]) {
-            subStr = s.substr(leftMiddle, 2);
-            for (int i = 1; middle + i < len && leftMiddle - i >= 0; i++) {
-                if (s[leftMiddle - i] == s[middle + i]) {
-                subStr = s.substr(leftMiddle - i, 2 * i + 2);
-                }
-                else return subStr;
-            }
+    string palindrome = "";
+    // {'a', 'b', 'b' a}
+    for (int i = 0; i < s.length(); i++) {
+        int left, right;
+        if (s.length() % 2 == 0) {
+            left = i;
+            right = i + 1;
         }
         else {
-            
+            left = i - 1;
+            right = i + 1;
         }
-    }
-    else {
-        
-        for (int i = 1; middle - i >= 0 && middle + i < len; i++) {
-            if (s[middle - i] == s[middle + i]) {
-                subStr = s.substr(middle - i, 2 * i + 1);
+        while (left >= 0 && right < s.length()) {
+            if (s[left] == s[right]) {
+                string candidate = s.substr(left, right - left + 1);
+                if (candidate.length() > palindrome.length())
+                    palindrome = candidate;
+                left--; right++;
+                
             }
-            return subStr;
+            else {
+                break;
+            }
         }
     }
-    
-    return subStr;
+    return palindrome;
 }
 
 
