@@ -2,7 +2,8 @@
 using namespace std;
 
 string longestPalindrome(string s) {
-    string palindrome = "";
+    if (s.length() == 1) return s;
+    string palindrome = string(1, s[0]);
     // {'a', 'b', 'b' a}
     for (int i = 0; i < s.length(); i++) {
         int left, right;
