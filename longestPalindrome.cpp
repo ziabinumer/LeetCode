@@ -7,14 +7,25 @@ string longestPalindrome(string s) {
     // {'a', 'b', 'b' a}
     for (int i = 0; i < s.length(); i++) {
         int left, right;
-        if (s.length() % 2 == 0) {
-            left = i;
-            right = i + 1;
+        left = i;
+        right = i + 1;
+        
+        while (left >= 0 && right < s.length()) {
+            if (s[left] == s[right]) {
+                string candidate = s.substr(left, right - left + 1);
+                if (candidate.length() > palindrome.length())
+                    palindrome = candidate;
+                left--; right++;
+                
+            }
+            else {
+                break;
+            }
         }
-        else {
-            left = i - 1;
-            right = i + 1;
-        }
+
+        left = i - 1;
+        right = i + 1;
+
         while (left >= 0 && right < s.length()) {
             if (s[left] == s[right]) {
                 string candidate = s.substr(left, right - left + 1);
