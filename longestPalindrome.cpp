@@ -5,7 +5,7 @@ string longestPalindrome(string s) {
     int len = s.length();
     if (len == 1) return s;
     int middle = len / 2;
-    string subStr = "";
+    string subStr = string(1, s[middle]);
     if (len % 2 == 0) {
         int leftMiddle = middle - 1;
         if (s[leftMiddle] == s[middle]) {
@@ -18,7 +18,7 @@ string longestPalindrome(string s) {
             }
         }
         else {
-            return string(1, s[leftMiddle]);
+            
         }
     }
     else {
@@ -27,7 +27,7 @@ string longestPalindrome(string s) {
             if (s[middle - i] == s[middle + i]) {
                 subStr = s.substr(middle - i, 2 * i + 1);
             }
-            
+            return subStr;
         }
     }
     
