@@ -10,17 +10,17 @@ public class TriangularSumOfArray {
 
 class Solution {
     public int triangularSum(int[] nums) {
+        int n = nums.length;
         int result = 0;
-        int length = nums.length;
-        while (length >= 1) {
-            if (length == 1) return nums[0];
-            for (int i = 0; i < length - 1; i++) {
-                nums[i] = (nums[i] + nums[i + 1]) % 10;
-            }
-            System.out.println(Arrays.toString(nums));
-            length--;
+        long coeff = 1; 
+
+        for (int i = 0; i < n; i++) {
+            result = (result + (int)(coeff * nums[i])) % 10;
+
+            coeff = coeff * (n - 1 - i) / (i + 1);
         }
 
         return result;
     }
 }
+
