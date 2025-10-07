@@ -14,14 +14,32 @@ public class MedianOfSortedArrays {
 
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] mergedArr = new int[nums1.length + nums2.length];
+        int total = nums1.length + nums2.length;
+        int[] mergedArr = new int[total];
 
-        System.arraycopy(nums1, 0, mergedArr, 0, nums1.length);
-        System.arraycopy(nums2, 0, mergedArr, nums1.length, nums2.length);
+        int l = 0, r = 0, i = 0;
 
-        Arrays.sort(mergedArr);
+        while (l < nums1.length && r < nums2.length) {
+            if (nums1[l] <= nums2[r]) {
+                mergedArr[i]  = nums1[l];
+                l++; i++;
+            }
+            else {
+                mergedArr[i] = nums2[r];
+                r++; i++;
+            }
+        }
 
-        int total = mergedArr.length;
+        while (l < nums1.length) {
+            mergedArr[i] = nums1[l];
+            l++;i++;
+        }
+
+        while (r < nums2.length) {
+            mergedArr[i] = nums2[r];
+            r++;i++;
+        }
+
 
         if (total % 2 == 1) {
             return mergedArr[total / 2];
